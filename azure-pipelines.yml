@@ -44,29 +44,17 @@ stages:
       inputs:
         targetPath: $(Build.ArtifactStagingDirectory)
 
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-  jobs:
-  - deployment: DeployLinuxWebApp
-    displayName: Deploy Linux Web App
-    environment: 'development'
-    pool: 
-      vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: DownloadPipelineArtifact@1
-            displayName: 'Download Pipeline Artifact'
-            inputs:
-              buildType: 'current'
-
-          - task: AzureWebApp@1
-            displayName: 'Azure Web App Deploy: gs-spring-boot'
-            inputs:
-              azureSubscription: $(azureSubscription)
-              appType: webAppLinux
-              appName: $(webAppName)
-              package: '$(System.ArtifactsDirectory)/drop/**/target/*.?(war|jar)'
+- task: fortifyvsts.hpe-security-fortify-vsts.build-task-fortify-on-demand-static.FortifyOnDemandStatic@8
+  displayName: 'Run Fortify on Demand static assessment on app'
+  inputs:
+    FortifyProjects: app
+    FodConnection: 
+    ReleaseOptions: 0
+    ReleaseId: 720872
+    EntitlementSelection: 1
+    EntitlementPreference: 1
+    OverrideScanSettings: 2
+    InProgressScanActionType: 2
+    RemediationScanPreference: 2
+    PollingInterval: 0
+    PolicyFailAction: 0
