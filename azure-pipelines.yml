@@ -48,7 +48,7 @@ stages:
   displayName: 'Run Fortify on Demand static assessment on app'
   inputs:
     FortifyProjects: app
-    FodConnection: 
+    FodConnection: 'AMS_pjtest'
     ReleaseOptions: 0
     ReleaseId: 720872
     EntitlementSelection: 1
