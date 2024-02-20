@@ -50,6 +50,6 @@ jobs:
           FOD_TENANT: ${{secrets.FOD_TENANT}}
           FOD_CLIENT_ID: ${{secrets.FOD_CLIENT_ID}}
           FOD_CLIENT_SECRET: ${{secrets.FOD_CLIENT_SECRET}}
-          FOD_RELEASE: ${{ secrets.FOD_RELEASE_ID }}
+          FOD_RELEASE: ${{secrets.FOD_RELEASE_ID}}
           EXTRA_PACKAGE_OPTS: -oss
           DO_EXPORT: true
