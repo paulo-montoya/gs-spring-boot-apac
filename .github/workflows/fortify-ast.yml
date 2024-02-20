@@ -18,7 +18,7 @@ on:
   push:
     branches: [ "master" ]
   schedule:
-    - cron: '0 6 * * *' 
+    - cron: '0 6 * * *'
     
 jobs:
   Fortify-AST-Scan:
@@ -47,6 +47,7 @@ jobs:
           sast-scan: true
         env:
           FOD_URL: https://apac.fortify.com
+          FOD_TENANT: ${{secrets.FOD_TENANT}}
           FOD_CLIENT_ID: ${{secrets.FOD_CLIENT_ID}}
           FOD_CLIENT_SECRET: ${{secrets.FOD_CLIENT_SECRET}}
           FOD_RELEASE: ${{ secrets.FOD_RELEASE_ID }}
